@@ -6,6 +6,9 @@
     <title>Rock Paper Scissors</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
 </head>
 <body>
     <h1>ROCK PAPER SCISSORS</h1>
@@ -15,41 +18,35 @@
             <h2>PLAYER</h2>
             <span class="info">
                 <img src="images/player.png" alt="player">
-                <p>SCORE: 0</p>
+                <p id="playerScore">SCORE: 0</p>
             </span>
-            <span class="choices">
-                <button>
+            <span class="choices" id="playerChoices">
+                <button id="rock">
                     <p>ROCK</p>
-                    <img src="images/rock.jpg" alt="rock">
                 </button>
-                <button>
+                <button id="paper">
                     <p>PAPER</p>
-                    <img src="images/paper.jpg" alt="paper">
                 </button>
-                <button>
+                <button id="scissors">
                     <p>SCISSORS</p>
-                    <img src="images/scissors.jpg" alt="scissors">
                 </button>
             </span>
         </div>
         <div class="card">
             <h2>COMPUTER</h2>
             <span class="info">
-                <img src="images/bot.png" alt="computer">
-                <p>SCORE: 0</p>
+                <img src="images/computer.png" alt="computer">
+                <p id="computerScore">SCORE: 0</p>
             </span>
-            <span class="choices">
-                <button>
+            <span class="choices" id="computerChoices">
+                <button id="rock">
                     <p>ROCK</p>
-                    <img src="images/rock.jpg" alt="rock">
                 </button>
-                <button>
+                <button id="paper">
                     <p>PAPER</p>
-                    <img src="images/paper.jpg" alt="paper">
                 </button>
-                <button>
+                <button id="scissors">
                     <p>SCISSORS</p>
-                    <img src="images/scissors.jpg" alt="scissors">
                 </button>
             </span>
         </div>

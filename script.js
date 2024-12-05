@@ -1,9 +1,6 @@
 let options = ['rock', 'paper', 'scissors'];
-
-let score = 0;
-
+let playerScore = 0;
 let computerScore = 0;
-
 let roundsPlayed = 0;
 
 function getRandomInt(max) {
@@ -14,43 +11,32 @@ function getComputerChoice() {
     return options[getRandomInt(3)];
 }
 
-function getUserChoice() {
-    while (true)
-    {
-        let userChoice = prompt("Choose between 'rock', 'paper', and 'scissors'");
-        if (userChoice === null) return;
-        userChoice.toLowerCase();
-        if (userChoice === 'rock' || userChoice === 'paper' || userChoice === 'scissors') return userChoice;
-        else console.log(userChoice + ' is not a valid option');
-    }
-}
-
-function calculateWinner(playerOne, playerTwo) {
-    switch (playerOne) {
+function calculateWinner(player, computer) {
+    switch (player) {
         case 'rock':
-            switch (playerTwo) {
+            switch (computer) {
                 case 'rock':
                     return 'tie';
                 case 'paper':
-                    return 'playerTwo';
+                    return 'computer';
                 case 'scissors':
-                    return 'playerOne';
+                    return 'player';
             }
         case 'paper':
-            switch (playerTwo) {
+            switch (computer) {
                 case 'rock':
-                    return 'playerOne';
+                    return 'player';
                 case 'paper':
                     return 'tie';
                 case 'scissors':
-                    return 'playerTwo';
+                    return 'computer';
             }
         case 'scissors':
-            switch (playerTwo) {
+            switch (computer) {
                 case 'rock':
-                    return 'playerTwo';
+                    return 'computer';
                 case 'paper':
-                    return 'playerOne';
+                    return 'player';
                 case 'scissors':
                     return 'tie';
             }
@@ -59,68 +45,112 @@ function calculateWinner(playerOne, playerTwo) {
 
 function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
-
     let winner = calculateWinner(playerChoice, computerChoice);
-
-    let result = '';
+    let playerColor;
+    let computerColor;
 
     switch (winner) {
-        case 'playerOne':
-            score++
-            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. You win!`;
+        case 'player':
+            playerScore++
+            playWinSound();
+            playerColor = "#40ff86";
+            computerColor = "#ff4040";
             break;
-        case 'playerTwo':
+        case 'computer':
             computerScore++;
-            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. You lose!`;
+            playLoseSound();
+            playerColor = "#ff4040";
+            computerColor = "#40ff86";
             break;
         case 'tie':
-            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. It's a tie!`;
+            playLoseSound();
+            playerColor = "#ffc940";
+            computerColor = "#ffc940";
             break;
     }
 
-    updateRoundsPlayed();
-
-    displayResults(result);
+    displayChoice(playerChoice, computerChoice, playerColor, computerColor);
+    updateScore();
 }
 
-function updateRoundsPlayed() {
-    roundsPlayed++;
-
-    let roundsPlayedText = document.querySelector("#rounds");
-    roundsPlayedText.textContent = `Rounds played: ${roundsPlayed}`;
+function updateScore() {
+    playerScoreText.textContent = `SCORE: ${playerScore}`;
+    computerScoreText.textContent = `SCORE: ${computerScore}`;
 }
 
-function displayResults(result = "") {
-    let body = document.querySelector("body");
+let playerChoices = document.querySelector("#playerChoices");
+let playerScoreText = document.querySelector("#playerScore");
+let computerScoreText = document.querySelector("#computerScore");
+let playerRockButton = document.querySelector("#playerChoices #rock");
+let playerPaperButton = document.querySelector("#playerChoices #paper");
+let playerScissorsButton = document.querySelector("#playerChoices #scissors");
+let computerRockButton = document.querySelector("#computerChoices #rock");
+let computerPaperButton = document.querySelector("#computerChoices #paper");
+let computerScissorsButton = document.querySelector("#computerChoices #scissors");
 
-    let resultHeading = document.createElement("h2");
-    resultHeading.textContent = "Results";
+playerChoices.addEventListener("click", (event) => {
+    if (event.target.id === "rock" || event.target.id === "paper" || event.target.id === "scissors")
+    {
+        let playerChoice = event.target.id;
+        playRound(playerChoice);
+    }
+});
 
-    body.appendChild(resultHeading);
+let playerButtons = document.querySelectorAll("#playerChoices button");
+let computerButtons = document.querySelectorAll("#computerChoices button");
 
-    let resultText = document.createElement("p") 
-    resultText.textContent = result;
+playerButtons.forEach((element) => {
+    element.addEventListener("mouseover", (event) => {
+        element.style.cursor = "pointer";
+    });
+});
 
-    body.appendChild(resultText);
+function resetChoice() {
+    playerButtons.forEach((element) => {
+        element.style.borderColor = "white";
+    });
+    computerButtons.forEach((element) => {
+        element.style.borderColor = "white";
+    });
 }
 
-let span = document.querySelector("span");
+function displayChoice(playerChoice, computerChoice, playerColor, computerColor) {
+    resetChoice();
 
-span.addEventListener("click", (e) => {
-    let target = e.target;
-    let playerChoice = '';
-
-    switch (target.id) {
+    switch (playerChoice) {
         case "rock":
-            playerChoice = "rock";
+            playerRockButton.style.borderColor = playerColor;
             break;
         case "paper":
-            playerChoice = "paper";
+            playerPaperButton.style.borderColor = playerColor;
             break;
         case "scissors":
-            playerChoice = "scissors";
+            playerScissorsButton.style.borderColor = playerColor;
+            break;
+        default:
             break;
     }
+    switch (computerChoice) {
+        case "rock":
+            computerRockButton.style.borderColor = computerColor;
+            break;
+        case "paper":
+            computerPaperButton.style.borderColor = computerColor;
+            break;
+        case "scissors":
+            computerScissorsButton.style.borderColor = computerColor;
+            break;
+        default:
+            break;
+    }
+}
 
-    playRound(playerChoice);
-});
+function playWinSound() {
+    let audio = new Audio("audio/correct.mp3");
+    audio.play();
+}
+
+function playLoseSound() {
+    let audio = new Audio("audio/incorrect.mp3");
+    audio.play();
+}

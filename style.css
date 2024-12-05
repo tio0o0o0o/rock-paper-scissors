@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Inter", sans-serif;
 }
 
 body {
@@ -22,6 +23,7 @@ body > p {
     text-align: center;
     margin-bottom: 40px;
     color: white;
+    font-weight: 500;
 }
 
 .cardWrapper {
@@ -36,15 +38,16 @@ body > p {
     border: rgb(77, 77, 77) solid 1px;
     border-radius: 10px;
     width: 350px;
+    box-shadow: 3px 3px 10px;
 }
 
-.card h2 {
+.card > h2 {
     text-align: center;
     color: white;
     margin-bottom: 10px;
 }
 
-.card p {
+.card > p {
     color: white;
 }
 
@@ -60,28 +63,50 @@ body > p {
     width: 30px;
 }
 
+.info p {
+    color: white;
+    font-weight: 500;
+}
+
 .choices {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    height: 120px;
 }
 
-.choices p {
-    color: rgb(31, 31, 31);
-}
-
-.choices button {
-    border: none;
-    background-color: white;
+button {
+    border: white solid 5px;
+    border-radius: 10px;
+    flex: 1 1 0;
+    background-size: cover;
+    background-position: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
+    box-shadow: 3px 3px 10px;
 }
 
-.choices p {
-    flex: 1 0 auto;
+button:hover {
+    transform: translateY(-5px);
 }
 
-.choices img {
-    width: 80px;
-    flex: 1;
+#rock {
+    background-image: url(images/rock.jpg);
 }
+
+#paper {
+    background-image: url(images/paper.jpg);
+}
+
+#scissors {
+    background-image: url(images/scissors.jpg);
+}
+
+button p {
+    color: white;
+    background-color: rgba(31, 31, 31, 0.705);
+    padding: 2px 5px;
+    font-weight: 600;
+}
+
+
