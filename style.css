@@ -37,7 +37,7 @@ body > p {
     padding: 20px;
     border: rgb(77, 77, 77) solid 1px;
     border-radius: 10px;
-    width: 350px;
+    width: 500px;
     box-shadow: 3px 3px 10px;
 }
 
@@ -71,7 +71,7 @@ body > p {
 .choices {
     display: flex;
     gap: 20px;
-    height: 120px;
+    height: 200px;
 }
 
 .cardWrapper button {
@@ -87,7 +87,7 @@ body > p {
     cursor: pointer;
 }
 
-.cardWrapper button:hover {
+#playerChoices button:hover {
     transform: translateY(-5px);
 }
 
