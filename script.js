@@ -4,6 +4,8 @@ let score = 0;
 
 let computerScore = 0;
 
+let roundsPlayed = 0;
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -55,67 +57,70 @@ function calculateWinner(playerOne, playerTwo) {
     }
 }
 
-function playRound() {
-    let userChoice = getUserChoice();
+function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
 
-    let winner = calculateWinner(userChoice, computerChoice);
+    let winner = calculateWinner(playerChoice, computerChoice);
+
+    let result = '';
 
     switch (winner) {
         case 'playerOne':
             score++
-            console.log(`You chose ${userChoice}. The computer chose ${computerChoice}. You win!`);
+            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. You win!`;
             break;
         case 'playerTwo':
             computerScore++;
-            console.log(`You chose ${userChoice}. The computer chose ${computerChoice}. You lose!`);
+            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. You lose!`;
             break;
         case 'tie':
-            console.log(`You chose ${userChoice}. The computer chose ${computerChoice}. It's a tie!`);
+            result = `You chose ${playerChoice}. The computer chose ${computerChoice}. It's a tie!`;
             break;
     }
+
+    updateRoundsPlayed();
+
+    displayResults(result);
 }
 
-function calculateFinalWinner() {
-    if (score > computerScore) return 'user';
-    else if (score < computerScore) return 'computer';
-    else return 'tie';
+function updateRoundsPlayed() {
+    roundsPlayed++;
+
+    let roundsPlayedText = document.querySelector("#rounds");
+    roundsPlayedText.textContent = `Rounds played: ${roundsPlayed}`;
 }
 
-function playGame()
-{
-    for (let i = 0; i < 5; i++)
-    {
-        playRound();
-    }
-    
-    if (calculateFinalWinner() === 'user') {
-        console.log(`You win! Your score is ${score}`);
-    }
-    else if (calculateFinalWinner() === 'computer') {
-        console.log(`You lose! Your score is ${score}`);
-    }
-    else {
-        console.log(`It's a tie! Your score is ${score}`);
-    }
+function displayResults(result = "") {
+    let body = document.querySelector("body");
+
+    let resultHeading = document.createElement("h2");
+    resultHeading.textContent = "Results";
+
+    body.appendChild(resultHeading);
+
+    let resultText = document.createElement("p") 
+    resultText.textContent = result;
+
+    body.appendChild(resultText);
 }
 
-function repeatGame() {
-    while (true) {
-        playGame();
-        score = 0;
-        computerScore = 0;
-        if (getPlayAgain() === false) break;
-    }
-}
+let span = document.querySelector("span");
 
-function getPlayAgain() {
-    while (true)
-    {
-        playAgain = prompt("Play again? y/n").toLowerCase();
-        if (playAgain === 'y') return true;
-        else if (playAgain === 'n') return false;
-    }
-}
+span.addEventListener("click", (e) => {
+    let target = e.target;
+    let playerChoice = '';
 
-repeatGame();
+    switch (target.id) {
+        case "rock":
+            playerChoice = "rock";
+            break;
+        case "paper":
+            playerChoice = "paper";
+            break;
+        case "scissors":
+            playerChoice = "scissors";
+            break;
+    }
+
+    playRound(playerChoice);
+});

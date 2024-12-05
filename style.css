@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(31, 31, 31);
+}
+
+body > h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    color: white;
+}
+
+body > p {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.cardWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background-color: rgb(77, 77, 77);
+    padding: 20px;
+    border: rgb(77, 77, 77) solid 1px;
+    border-radius: 10px;
+    width: 350px;
+}
+
+.card h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: white;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info img {
+    width: 30px;
+}
+
+.choices {
+    display: flex;
+    gap: 10px;
+}
+
+.choices p {
+    color: rgb(31, 31, 31);
+}
+
+.choices button {
+    border: none;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choices p {
+    flex: 1 0 auto;
+}
+
+.choices img {
+    width: 80px;
+    flex: 1;
+}
