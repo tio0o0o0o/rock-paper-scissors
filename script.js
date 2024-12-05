@@ -1,7 +1,6 @@
 let options = ['rock', 'paper', 'scissors'];
 let playerScore = 0;
 let computerScore = 0;
-let roundsPlayed = 0;
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -93,6 +92,7 @@ playerChoices.addEventListener("click", (event) => {
     {
         let playerChoice = event.target.id;
         playRound(playerChoice);
+        checkGameFinished();
     }
 });
 
@@ -104,6 +104,13 @@ playerButtons.forEach((element) => {
         element.style.cursor = "pointer";
     });
 });
+
+function checkGameFinished() {
+    if (playerScore >= 5 || computerScore >= 5) 
+    {
+        reset();
+    }
+}
 
 function resetChoice() {
     playerButtons.forEach((element) => {
@@ -153,4 +160,11 @@ function playWinSound() {
 function playLoseSound() {
     let audio = new Audio("audio/incorrect.mp3");
     audio.play();
+}
+
+function reset() {
+    playerScore = 0;
+    computerScore = 0;
+    resetChoice();
+    updateScore();
 }
