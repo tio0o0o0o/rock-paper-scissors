@@ -74,7 +74,7 @@ body > p {
     height: 120px;
 }
 
-button {
+.cardWrapper button {
     border: white solid 5px;
     border-radius: 10px;
     flex: 1 1 0;
@@ -84,9 +84,10 @@ button {
     flex-direction: column-reverse;
     align-items: center;
     box-shadow: 3px 3px 10px;
+    cursor: pointer;
 }
 
-button:hover {
+.cardWrapper button:hover {
     transform: translateY(-5px);
 }
 
@@ -102,11 +103,41 @@ button:hover {
     background-image: url(images/scissors.jpg);
 }
 
-button p {
+.cardWrapper button p {
     color: white;
     background-color: rgba(31, 31, 31, 0.705);
     padding: 2px 5px;
     font-weight: 600;
 }
 
+/* End screen */
+.endScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
 
+.endScreen img {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.endScreen p {
+    margin-bottom: 40px;
+    color: white;
+}
+
+.endScreen button {
+    border: white solid 5px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.endScreen button:hover {
+    background-color: grey;
+    border-color: grey;
+}

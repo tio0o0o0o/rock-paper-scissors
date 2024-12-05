@@ -99,17 +99,26 @@ playerChoices.addEventListener("click", (event) => {
 let playerButtons = document.querySelectorAll("#playerChoices button");
 let computerButtons = document.querySelectorAll("#computerChoices button");
 
-playerButtons.forEach((element) => {
-    element.addEventListener("mouseover", (event) => {
-        element.style.cursor = "pointer";
-    });
-});
-
 function checkGameFinished() {
-    if (playerScore >= 5 || computerScore >= 5) 
-    {
-        reset();
+    let winnerTextString = "";
+    let winnerImageString = "";
+    let playSoundEffect;
+
+    if (playerScore >= 5) {
+        winnerTextString = "PLAYER WINS!";
+        winnerImageString = "images/player.png";
+        playSoundEffect = playFinalWinSound;
     }
+    else if (computerScore >= 5) {
+        winnerTextString = "COMPUTER WINS!";
+        winnerImageString = "images/computer.png";
+        playSoundEffect = playFinalLoseSound;
+    }
+    else {
+        return;
+    }
+
+    showEndScreen(winnerTextString, winnerImageString, playSoundEffect);
 }
 
 function resetChoice() {
@@ -162,9 +171,48 @@ function playLoseSound() {
     audio.play();
 }
 
+function playFinalWinSound() {
+    let audio = new Audio("audio/win.mp3");
+    audio.play();
+}
+
+function playFinalLoseSound() {
+    let audio = new Audio("audio/lose.mp3");
+    audio.play();
+}
+
 function reset() {
     playerScore = 0;
     computerScore = 0;
     resetChoice();
     updateScore();
 }
+
+let cardWrapper = document.querySelector("#cardWrapper");
+let subtitle = document.querySelector("#subtitle");
+let endScreen = document.querySelector("#endScreen");
+let playAgain = document.querySelector("#playAgain");
+let winnerText = document.querySelector("#endScreen p");
+let winnerImage = document.querySelector("#endScreen img");
+
+function showEndScreen(winnerTextString, winnerImageString, playSoundEffect) {
+    winnerText.textContent = winnerTextString;
+    winnerImage.src = winnerImageString;
+
+    cardWrapper.style.display = "none";
+    subtitle.style.display = "none";
+    endScreen.style.display = "flex";
+
+    playSoundEffect();
+}
+
+function showGameplayScreen() {
+    cardWrapper.style.display = "flex";
+    subtitle.style.display = "block";
+    endScreen.style.display = "none";
+}
+
+playAgain.addEventListener("click", (event) => {
+    reset();
+    showGameplayScreen();
+});
