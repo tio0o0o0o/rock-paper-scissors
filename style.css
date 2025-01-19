@@ -88,6 +88,8 @@ body > p {
 
 #playerChoices button {
     cursor: pointer;
+    transition-duration: 50ms;
+    transition-property: transform;
 }
 
 #playerChoices button:hover {
